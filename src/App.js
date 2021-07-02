@@ -1,19 +1,24 @@
 import React from 'react';
 import axios from 'axios';
+import Navbar from './components/Navbar';
 
 import './App.css';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 class App extends React.Component {
     state = {
-        advice: ''
+        content: '',
+        author: '',
     };
 
     fetchData = async () => {
-        axios.get('https://api.adviceslip.com/advice')
+        axios.get('https://api.quotable.io/random')
             .then((response)=>{
-                const { advice } = response.data.slip;
-                console.log(advice);
-                this.setState({advice});
+                const content = response.data.content;
+                const author = response.data.author;
+                console.log(response.data.content);
+                this.setState({content,author});
             })
             .catch((error)=>{
                 console.log(error);
@@ -26,16 +31,20 @@ class App extends React.Component {
     }
 
     render() {
-        const {advice} = this.state;
+        const {content,author} = this.state;
         return(
-            <div className="app">
-                <div className="card">
-                    <h1 className="heading">{advice}</h1>
-                    <button className="button" onClick={this.fetchData}>
-                        <span>Generate</span>
-                    </button>
+            <>
+                <Navbar />
+                <div className="card text-center my-card mx-auto mt-5 p-2">
+                    <div className="card-body">
+                         <h1 className="display-6">{content}</h1>
+                        <p className="card-text">{author}</p>
+                        <button className="btn btn-primary btn-lg" onClick={this.fetchData}>
+                            <span>Generate</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </>
         )
     };
 }
