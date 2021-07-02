@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 import './App.css';
 
@@ -35,7 +36,7 @@ class App extends React.Component {
         return(
             <>
                 <Navbar />
-                <div className="card text-center my-card mx-auto mt-5 p-2">
+                <div className="card text-center my-card mx-auto mt-5 p-5">
                     <div className="card-body">
                          <h1 className="display-6">{content}</h1>
                         <p className="card-text">{author}</p>
@@ -44,7 +45,9 @@ class App extends React.Component {
                         </button>
                     </div>
                 </div>
+                <Footer />
             </>
+            
         )
     };
 }
